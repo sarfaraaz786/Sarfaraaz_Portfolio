@@ -25,9 +25,9 @@ const sendContactEmail = async (req, res) => {
     // Use an App Password (not your regular Gmail password)
     const transporter = nodemailer.createTransport({
       // service: "gmail", // it is not working on render
-      host: "smtp.gmail.com",
-      port: 465,
-      secure: true,
+      host: "smtp.gmail.com", // that is why i added this 3 line host, port, secure
+      port: 587,
+      secure: false,
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
