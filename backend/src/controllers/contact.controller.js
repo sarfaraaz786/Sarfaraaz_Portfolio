@@ -24,7 +24,10 @@ const sendContactEmail = async (req, res) => {
     // Create a transporter using Gmail SMTP
     // Use an App Password (not your regular Gmail password)
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      // service: "gmail", // it is not working on render
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true,
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
