@@ -21,8 +21,8 @@ const PROJECTS = [
       "Dynamic ATS-optimized PDF resume generator",
       "PDF parsing → context-aware AI prompts",
     ],
-    liveUrl:   "https://your-live-link.vercel.app",  // Replace with actual URL
-    githubUrl: "https://github.com/mdsarfaraaz",
+    liveUrl:   "https://gen-ai-job-preparation-web-applicat.vercel.app/",  // Replace with actual URL
+    githubUrl: "https://github.com/sarfaraaz786/Gen-AI-Job-Preparation-Web-Application",
     color: "cyan",
   },
   {
@@ -38,8 +38,8 @@ const PROJECTS = [
       "Auth-gated review with return URL redirect",
       "Real-time Markdown AI feedback rendering",
     ],
-    liveUrl:   "https://your-live-link.vercel.app",  // Replace with actual URL
-    githubUrl: "https://github.com/mdsarfaraaz",
+    liveUrl:   "https://ai-code-reviewer-wine.vercel.app/",  // Replace with actual URL
+    githubUrl: "https://github.com/sarfaraaz786/Ai-Code-Reviewer",
     color: "purple",
   },
 ];
