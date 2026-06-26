@@ -1,0 +1,128 @@
+// ===========================
+// About.scss
+// ===========================
+
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.about {
+  background: linear-gradient(180deg, $color-bg 0%, $color-bg-card 100%);
+
+  &__title {
+    @include section-title;
+  }
+
+  // ── Two-column layout: text | stats ──────────────────
+  &__body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $space-lg;
+    align-items: start;
+
+    @include tablet {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  // ── Text column ───────────────────────────────────────
+  &__text {
+    p {
+      color: $color-text-muted;
+      line-height: 1.9;
+      margin-bottom: $space-sm;
+      font-size: 1.05rem;
+    }
+  }
+
+  &__intro {
+    font-size: 1.15rem !important;
+    color: $color-text !important;
+  }
+
+  // Highlighted inline spans
+  &__highlight {
+    color: $color-cyan;
+    font-weight: 600;
+  }
+
+  // ── Info row ──────────────────────────────────────────
+  &__info-row {
+    margin-top: $space-md;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: $space-sm;
+    border-left: 2px solid rgba($color-cyan, 0.3);
+  }
+
+  &__info-item {
+    display: flex;
+    gap: $space-sm;
+    font-size: $fs-small;
+    align-items: center;
+
+    a {
+      color: $color-cyan;
+      &:hover { color: $color-purple; }
+    }
+  }
+
+  &__info-label {
+    color: $color-text-muted;
+    min-width: 100px;
+  }
+
+  // ── Stats grid ────────────────────────────────────────
+  &__stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $space-sm;
+
+    @include mobile {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  // Individual stat card
+  &__stat-card {
+    @include neon-border($color-purple);
+    background: $color-bg-card;
+    border-radius: $radius-lg;
+    padding: $space-md;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    transition: transform $transition-normal, box-shadow $transition-normal;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: $glow-purple;
+    }
+
+    // Alternate cards use different accent colors
+    &:nth-child(2) { @include neon-border($color-cyan); &:hover { box-shadow: $glow-cyan; } }
+    &:nth-child(3) { @include neon-border($color-pink); &:hover { box-shadow: $glow-pink; } }
+    &:nth-child(4) { @include neon-border($color-green); &:hover { box-shadow: 0 0 20px rgba($color-green, 0.4); } }
+  }
+
+  &__stat-value {
+    font-family: $font-display;
+    font-size: 2rem;
+    font-weight: 900;
+    @include gradient-text;
+
+    small {
+      font-size: 0.9rem;
+      font-weight: 400;
+    }
+  }
+
+  &__stat-label {
+    font-size: 0.75rem;
+    font-family: $font-display;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $color-text-muted;
+  }
+}

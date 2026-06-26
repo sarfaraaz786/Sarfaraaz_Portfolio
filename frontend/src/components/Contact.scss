@@ -1,0 +1,203 @@
+// ===========================
+// Contact.scss
+// ===========================
+
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.contact {
+  background: linear-gradient(180deg, $color-bg 0%, $color-bg-card 100%);
+
+  &__title {
+    @include section-title;
+  }
+
+  // ── Two-column: info | form ───────────────────────────
+  &__body {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: $space-lg;
+    align-items: start;
+
+    @include tablet {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  // ── Info panel ────────────────────────────────────────
+  &__info-lead {
+    font-size: 1.05rem;
+    color: $color-text;
+    line-height: 1.8;
+    margin-bottom: $space-md;
+  }
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+    gap: $space-sm;
+    margin-bottom: $space-md;
+  }
+
+  &__detail {
+    display: flex;
+    align-items: flex-start;
+    gap: $space-sm;
+
+    & > div {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    a, span:not(.contact__detail-label):not(.contact__detail-icon) {
+      color: $color-text;
+      font-size: $fs-small;
+    }
+
+    a:hover { color: $color-cyan; }
+  }
+
+  &__detail-icon {
+    font-size: 1.2rem;
+    padding-top: 2px;
+  }
+
+  &__detail-label {
+    font-size: 0.7rem;
+    font-family: $font-display;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: $color-text-muted;
+  }
+
+  &__socials {
+    display: flex;
+    gap: $space-sm;
+  }
+
+  &__social {
+    @include neon-btn($color-purple);
+    font-size: 0.7rem;
+    padding: 0.4rem 1rem;
+    text-decoration: none;
+  }
+
+  // ── Form ──────────────────────────────────────────────
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: $space-sm;
+    background: $color-bg-card;
+    border: 1px solid rgba($color-cyan, 0.15);
+    border-radius: $radius-lg;
+    padding: $space-md;
+  }
+
+  // Side-by-side row for name + email
+  &__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $space-sm;
+
+    @include mobile {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  &__label {
+    font-size: 0.75rem;
+    font-family: $font-display;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $color-text-muted;
+  }
+
+  // Shared styles for input and textarea
+  &__input {
+    background: rgba($color-bg, 0.8);
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    padding: 0.75rem $space-sm;
+    color: $color-text;
+    font-family: $font-body;
+    font-size: $fs-small;
+    outline: none;
+    transition: border-color $transition-fast, box-shadow $transition-fast;
+
+    &::placeholder {
+      color: $color-text-muted;
+    }
+
+    &:focus {
+      border-color: $color-cyan;
+      box-shadow: 0 0 0 3px rgba($color-cyan, 0.08);
+    }
+  }
+
+  &__textarea {
+    resize: vertical;
+    min-height: 120px;
+    line-height: 1.6;
+  }
+
+  // ── Feedback message ──────────────────────────────────
+  &__feedback {
+    font-size: $fs-small;
+    padding: 0.75rem $space-sm;
+    border-radius: $radius-md;
+
+    &--success {
+      background: rgba($color-green, 0.08);
+      border: 1px solid rgba($color-green, 0.25);
+      color: $color-green;
+    }
+
+    &--error {
+      background: rgba($color-pink, 0.08);
+      border: 1px solid rgba($color-pink, 0.25);
+      color: $color-pink;
+    }
+  }
+
+  // ── Submit button ─────────────────────────────────────
+  &__submit {
+    @include neon-btn($color-cyan);
+    font-size: 0.8rem;
+    align-self: flex-start;
+    position: relative;
+
+    // Filled style when not loading
+    background: rgba($color-cyan, 0.08);
+
+    &:hover:not(:disabled) {
+      background: rgba($color-cyan, 0.18);
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+  }
+
+  // Loading spinner
+  &__spinner {
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba($color-cyan, 0.3);
+    border-top-color: $color-cyan;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+}

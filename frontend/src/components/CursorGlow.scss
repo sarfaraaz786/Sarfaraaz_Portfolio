@@ -1,0 +1,31 @@
+// ===========================
+// CursorGlow.scss
+// The glowing orb that follows the cursor
+// ===========================
+
+@use '../styles/variables' as *;
+
+.cursor-glow {
+  position: fixed;       // Stays on screen, not inside scroll container
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  pointer-events: none;  // Never intercepts clicks or hover events
+  z-index: 0;
+
+  // Radial gradient creates a soft glowing blob
+  background: radial-gradient(
+    circle,
+    rgba($color-cyan, 0.06) 0%,
+    rgba($color-purple, 0.04) 40%,
+    transparent 70%
+  );
+
+  // Smooth lag behind the cursor — feels more organic
+  transition: left 0.12s ease-out, top 0.12s ease-out;
+
+  // Hide on touch devices (no cursor)
+  @media (hover: none) {
+    display: none;
+  }
+}

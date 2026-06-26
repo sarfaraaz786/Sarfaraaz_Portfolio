@@ -1,0 +1,284 @@
+// ===========================
+// Hero.scss
+// Full-screen hero with neon orbs, grid, typing animation
+// ===========================
+
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  @include flex-center;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 100px $space-md $space-md;
+
+  // ── Animated grid background ─────────────────────────
+  &__grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba($color-cyan, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba($color-cyan, 0.04) 1px, transparent 1px);
+    background-size: 50px 50px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+    animation: grid-drift 20s linear infinite;
+  }
+
+  // Subtle drift of the grid for life
+  @keyframes grid-drift {
+    0%   { background-position: 0 0; }
+    100% { background-position: 50px 50px; }
+  }
+
+  // ── Neon ambient orbs ────────────────────────────────
+  &__orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+
+    &--1 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba($color-cyan, 0.12), transparent 70%);
+      top: -100px;
+      left: -100px;
+      animation: orb-float 8s ease-in-out infinite;
+    }
+
+    &--2 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba($color-purple, 0.12), transparent 70%);
+      bottom: -50px;
+      right: -50px;
+      animation: orb-float 10s ease-in-out infinite reverse;
+    }
+
+    &--3 {
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba($color-pink, 0.08), transparent 70%);
+      top: 50%;
+      left: 60%;
+      animation: orb-float 12s ease-in-out infinite 3s;
+    }
+  }
+
+  @keyframes orb-float {
+    0%, 100% { transform: translate(0, 0); }
+    33%       { transform: translate(30px, -20px); }
+    66%       { transform: translate(-20px, 15px); }
+  }
+
+  // ── Main content ─────────────────────────────────────
+  &__content {
+    position: relative;   // Sits above grid + orbs
+    z-index: 1;
+    text-align: center;
+    max-width: 800px;
+  }
+
+  // ── "Available" badge ─────────────────────────────────
+  &__greeting {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-xs;
+    font-size: $fs-small;
+    color: $color-text-muted;
+    letter-spacing: 0.08em;
+    margin-bottom: $space-md;
+    padding: 0.4rem 1rem;
+    border: 1px solid rgba($color-green, 0.25);
+    border-radius: 50px;
+    background: rgba($color-green, 0.05);
+  }
+
+  &__greeting-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: $color-green;
+    box-shadow: 0 0 8px $color-green;
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  // ── Name heading ──────────────────────────────────────
+  &__name {
+    font-family: $font-display;
+    font-size: $fs-hero;
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: $space-sm;
+
+    // Neon gradient text
+    background: $gradient-text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+
+    // Subtle text glow for depth
+    filter: drop-shadow(0 0 30px rgba($color-cyan, 0.4));
+    animation: name-shimmer 4s ease-in-out infinite;
+  }
+
+  @keyframes name-shimmer {
+    0%, 100% { filter: drop-shadow(0 0 30px rgba($color-cyan, 0.4)); }
+    50%       { filter: drop-shadow(0 0 50px rgba($color-purple, 0.5)); }
+  }
+
+  // ── Typing role line ──────────────────────────────────
+  &__role-wrapper {
+    height: 2.5rem;                     // Fixed height prevents layout shift
+    margin-bottom: $space-md;
+    @include flex-center;
+  }
+
+  &__role {
+    font-family: $font-display;
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    font-weight: 600;
+    color: $color-cyan;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  // Blinking text cursor
+  &__cursor {
+    color: $color-purple;
+    font-weight: 300;
+    animation: blink 0.8s step-end infinite;
+    margin-left: 2px;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
+  }
+
+  // ── Tagline ───────────────────────────────────────────
+  &__tagline {
+    font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+    color: $color-text-muted;
+    line-height: 1.8;
+    margin-bottom: $space-lg;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  // ── CTA Buttons ───────────────────────────────────────
+  &__cta {
+    display: flex;
+    gap: $space-sm;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: $space-md;
+  }
+
+  &__btn {
+    @include neon-btn;
+    font-size: 0.8rem;
+
+    &--primary {
+      background: rgba($color-cyan, 0.08);
+      border-color: $color-cyan;
+      color: $color-cyan;
+
+      &:hover {
+        background: rgba($color-cyan, 0.18);
+        box-shadow: $glow-cyan;
+      }
+    }
+
+    &--secondary {
+      border-color: $color-purple;
+      color: $color-purple;
+
+      &:hover {
+        background: rgba($color-purple, 0.1);
+        box-shadow: $glow-purple;
+      }
+    }
+  }
+
+  // ── Social links ──────────────────────────────────────
+  &__socials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $space-sm;
+  }
+
+  &__social-link {
+    font-size: $fs-small;
+    font-family: $font-display;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: $color-text-muted;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: color $transition-fast;
+
+    &:hover {
+      color: $color-cyan;
+    }
+  }
+
+  &__social-divider {
+    color: $color-border;
+  }
+
+  // ── Scroll hint ───────────────────────────────────────
+  &__scroll-hint {
+    position: absolute;
+    bottom: $space-md;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: $color-text-muted;
+    font-size: 0.7rem;
+    font-family: $font-display;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    animation: fade-in-up 2s ease 1.5s both;
+  }
+
+  &__scroll-line {
+    width: 1px;
+    height: 50px;
+    background: linear-gradient(to bottom, transparent, $color-cyan);
+    animation: scroll-drop 2s ease-in-out infinite;
+  }
+
+  @keyframes scroll-drop {
+    0%   { transform: scaleY(0); transform-origin: top; }
+    50%  { transform: scaleY(1); transform-origin: top; }
+    51%  { transform: scaleY(1); transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  @keyframes fade-in-up {
+    from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+    to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+  }
+
+  // ── Mobile adjustments ────────────────────────────────
+  @include mobile {
+    &__cta {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+}

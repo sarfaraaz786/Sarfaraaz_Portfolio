@@ -1,0 +1,169 @@
+// ===========================
+// Skills.scss
+// ===========================
+
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.skills {
+  background: $color-bg;
+
+  &__title {
+    @include section-title;
+  }
+
+  // ── 2x2 grid for category cards ───────────────────────
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $space-md;
+    margin-bottom: $space-lg;
+
+    @include tablet {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  // ── Individual category card ──────────────────────────
+  &__card {
+    background: $color-bg-card;
+    border-radius: $radius-lg;
+    padding: $space-md;
+    position: relative;
+    overflow: hidden;
+    transition: transform $transition-normal;
+
+    // Left border accent per category
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      border-radius: 3px 0 0 3px;
+    }
+
+    &--cyan  ::before, &--cyan  &::before  { background: $color-cyan; }
+    &--purple::before { background: $color-purple; }
+    &--pink  ::before { background: $color-pink; }
+    &--green ::before { background: $color-green; }
+
+    &:hover {
+      transform: translateY(-4px);
+    }
+
+    &--cyan   { border: 1px solid rgba($color-cyan,   0.2); &:hover { box-shadow: $glow-cyan; } }
+    &--purple { border: 1px solid rgba($color-purple, 0.2); &:hover { box-shadow: $glow-purple; } }
+    &--pink   { border: 1px solid rgba($color-pink,   0.2); &:hover { box-shadow: $glow-pink; } }
+    &--green  { border: 1px solid rgba($color-green,  0.2); &:hover { box-shadow: 0 0 20px rgba($color-green, 0.3); } }
+  }
+
+  // ── Card header ───────────────────────────────────────
+  &__card-header {
+    display: flex;
+    align-items: center;
+    gap: $space-xs;
+    margin-bottom: $space-md;
+  }
+
+  &__card-icon {
+    font-size: 1.4rem;
+  }
+
+  &__card-title {
+    font-family: $font-display;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $color-text;
+  }
+
+  // ── Skill list ────────────────────────────────────────
+  &__list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  &__item-top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.3rem;
+  }
+
+  &__item-name {
+    font-size: $fs-small;
+    color: $color-text;
+  }
+
+  &__item-pct {
+    font-size: $fs-small;
+    font-family: $font-display;
+    color: $color-text-muted;
+  }
+
+  // ── Progress bar ──────────────────────────────────────
+  &__bar-track {
+    height: 4px;
+    background: rgba($color-text-muted, 0.15);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  &__bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: $gradient-primary;
+    width: 0;   // starts at 0 — grows to --level via animation
+    animation: bar-grow 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    animation-delay: 0.3s;
+
+    // CSS custom property drives the target width
+    @keyframes bar-grow {
+      to { width: var(--level); }
+    }
+  }
+
+  // ── Tech tag section ──────────────────────────────────
+  &__tags-section {
+    text-align: center;
+  }
+
+  &__tags-label {
+    font-family: $font-display;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: $color-text-muted;
+    margin-bottom: $space-sm;
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    justify-content: center;
+  }
+
+  &__tag {
+    padding: 0.3rem 0.8rem;
+    border-radius: 50px;
+    border: 1px solid rgba($color-cyan, 0.25);
+    background: rgba($color-cyan, 0.04);
+    color: $color-text-muted;
+    font-size: 0.78rem;
+    font-family: $font-display;
+    letter-spacing: 0.04em;
+    transition: all $transition-fast;
+    cursor: default;
+
+    &:hover {
+      border-color: $color-cyan;
+      color: $color-cyan;
+      background: rgba($color-cyan, 0.08);
+    }
+  }
+}

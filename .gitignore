@@ -1,0 +1,18 @@
+# ===========================
+# Root .gitignore
+# Ignores both frontend and backend dependency/build folders
+# ===========================
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+
+# Backend
+backend/node_modules/
+backend/.env
+backend/uploads/
+
+# System
+.DS_Store
+Thumbs.db

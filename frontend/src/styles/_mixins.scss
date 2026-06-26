@@ -1,0 +1,133 @@
+// ===========================
+// _mixins.scss
+// Reusable SCSS mixins — keeps code DRY
+// ===========================
+
+@use 'variables' as *;
+
+// ── Responsive breakpoint helpers ───────────────────────
+@mixin mobile {
+  @media (max-width: #{$bp-mobile}) { @content; }
+}
+@mixin tablet {
+  @media (max-width: #{$bp-tablet}) { @content; }
+}
+@mixin desktop {
+  @media (min-width: #{$bp-desktop}) { @content; }
+}
+
+// ── Neon glowing border using pseudo-element ────────────
+// Usage: @include neon-border($color-cyan);
+@mixin neon-border($color: $color-cyan) {
+  position: relative;
+  border: 1px solid rgba($color, 0.3);
+  box-shadow: 0 0 15px rgba($color, 0.15), inset 0 0 15px rgba($color, 0.05);
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: $gradient-card-border;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity $transition-normal;
+  }
+
+  &:hover::before {
+    opacity: 1;
+  }
+}
+
+// ── Gradient text ────────────────────────────────────────
+@mixin gradient-text {
+  background: $gradient-text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+// ── Flex center shorthand ────────────────────────────────
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// ── Flex between shorthand ──────────────────────────────
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// ── Section layout — consistent padding + max-width ─────
+@mixin section-layout {
+  padding: $space-xl $space-md;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  @include tablet {
+    padding: $space-lg $space-md;
+  }
+
+  @include mobile {
+    padding: $space-lg $space-sm;
+  }
+}
+
+// ── Section heading style ───────────────────────────────
+@mixin section-title {
+  font-family: $font-display;
+  font-size: $fs-h2;
+  font-weight: 700;
+  @include gradient-text;
+  margin-bottom: $space-lg;
+  position: relative;
+  text-align: center;
+
+  // Decorative underline bar
+  &::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: $gradient-primary;
+    margin: 1rem auto 0;
+    border-radius: 2px;
+    box-shadow: $glow-cyan;
+  }
+}
+
+// ── Neon button base ─────────────────────────────────────
+@mixin neon-btn($color: $color-cyan) {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-xs;
+  padding: 0.75rem 2rem;
+  border: 1px solid $color;
+  border-radius: $radius-md;
+  font-family: $font-display;
+  font-size: $fs-small;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: $color;
+  background: transparent;
+  cursor: pointer;
+  transition: all $transition-normal;
+  text-decoration: none;
+
+  &:hover {
+    background: rgba($color, 0.1);
+    box-shadow: 0 0 20px rgba($color, 0.5), inset 0 0 20px rgba($color, 0.05);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}

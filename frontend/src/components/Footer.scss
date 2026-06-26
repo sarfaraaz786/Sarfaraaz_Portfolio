@@ -1,0 +1,62 @@
+// ===========================
+// Footer.scss
+// ===========================
+
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.footer {
+  border-top: 1px solid rgba($color-cyan, 0.1);
+  background: $color-bg-card;
+  padding: $space-md;
+
+  &__inner {
+    @include flex-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    gap: $space-sm;
+
+    @include mobile {
+      flex-direction: column;
+      text-align: center;
+      align-items: center;
+    }
+  }
+
+  &__brand {
+    font-family: $font-display;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: $color-text;
+  }
+
+  &__bracket {
+    color: $color-cyan;
+  }
+
+  &__copy {
+    font-size: $fs-small;
+    color: $color-text-muted;
+  }
+
+  &__links {
+    display: flex;
+    gap: $space-md;
+  }
+
+  &__link {
+    font-size: $fs-small;
+    font-family: $font-display;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $color-text-muted;
+    text-decoration: none;
+    transition: color $transition-fast;
+
+    &:hover {
+      color: $color-cyan;
+    }
+  }
+}

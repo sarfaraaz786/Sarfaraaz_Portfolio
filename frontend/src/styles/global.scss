@@ -1,0 +1,102 @@
+// ===========================
+// global.scss
+// Base reset, body styles, scrollbar, utility classes
+// ===========================
+
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// ── CSS Reset ───────────────────────────────────────────
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+// ── Root / Body ─────────────────────────────────────────
+html {
+  scroll-behavior: smooth;             // Smooth anchor scrolling
+  font-size: 16px;
+}
+
+body {
+  background-color: $color-bg;
+  color: $color-text;
+  font-family: $font-body;
+  line-height: 1.6;
+  overflow-x: hidden;                  // Prevent horizontal scroll from glow effects
+  -webkit-font-smoothing: antialiased;
+}
+
+// ── Custom Scrollbar (webkit) ───────────────────────────
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: $color-bg-card;
+}
+::-webkit-scrollbar-thumb {
+  background: $gradient-primary;
+  border-radius: 3px;
+}
+
+// ── Selection Color ─────────────────────────────────────
+::selection {
+  background: rgba($color-cyan, 0.3);
+  color: $color-text;
+}
+
+// ── Links ────────────────────────────────────────────────
+a {
+  color: $color-cyan;
+  text-decoration: none;
+  transition: color $transition-fast;
+
+  &:hover {
+    color: $color-purple;
+  }
+}
+
+// ── Images ───────────────────────────────────────────────
+img {
+  max-width: 100%;
+  display: block;
+}
+
+// ── Utility: Neon gradient text ──────────────────────────
+.gradient-text {
+  @include gradient-text;
+}
+
+// ── Utility: Section wrapper ─────────────────────────────
+.section-wrapper {
+  @include section-layout;
+}
+
+// ── Scanline overlay — subtle CRT effect on hero ─────────
+.scanlines {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+}
+
+// ── Reduced motion — respect user preference ─────────────
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

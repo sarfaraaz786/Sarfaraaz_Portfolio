@@ -1,0 +1,63 @@
+// ===========================
+// _variables.scss
+// Central design token file — all colors, fonts, spacing defined here
+// ===========================
+
+// ── Neon Color Palette ──────────────────────────────────
+$color-bg:          #0a0a0f;    // Deep dark background
+$color-bg-card:     #0f0f1a;    // Slightly lighter card background
+$color-bg-elevated: #14141f;    // Elevated surface (modals, hovers)
+
+$color-cyan:        #00f5ff;    // Electric cyan — primary accent
+$color-purple:      #bf00ff;    // Neon purple — secondary accent
+$color-pink:        #ff0080;    // Hot pink — tertiary / CTA
+$color-green:       #00ff88;    // Mint green — success / highlight
+
+$color-text:        #e0e0f0;    // Main text — slightly purple-tinted white
+$color-text-muted:  #7070a0;    // Dimmed text for labels, captions
+$color-border:      #1e1e33;    // Subtle border color
+
+// ── Gradients ───────────────────────────────────────────
+$gradient-primary:    linear-gradient(135deg, $color-cyan, $color-purple);
+$gradient-secondary:  linear-gradient(135deg, $color-purple, $color-pink);
+$gradient-text:       linear-gradient(90deg, $color-cyan, $color-purple, $color-pink);
+$gradient-card-border:linear-gradient(135deg, $color-cyan 0%, $color-purple 50%, $color-pink 100%);
+
+// ── Typography ──────────────────────────────────────────
+$font-display: 'Orbitron', sans-serif;   // Headers and name — futuristic
+$font-body:    'Inter', sans-serif;      // Body text — clean and readable
+
+// Font sizes using clamp() for fluid responsive scaling
+$fs-hero:   clamp(2.5rem, 6vw, 5rem);
+$fs-h2:     clamp(1.8rem, 4vw, 2.8rem);
+$fs-h3:     clamp(1.2rem, 2.5vw, 1.6rem);
+$fs-body:   1rem;
+$fs-small:  0.875rem;
+
+// ── Spacing ─────────────────────────────────────────────
+$space-xs:  0.5rem;
+$space-sm:  1rem;
+$space-md:  2rem;
+$space-lg:  4rem;
+$space-xl:  8rem;
+
+// ── Breakpoints ─────────────────────────────────────────
+$bp-mobile:  480px;
+$bp-tablet:  768px;
+$bp-desktop: 1024px;
+
+// ── Border Radius ───────────────────────────────────────
+$radius-sm: 4px;
+$radius-md: 8px;
+$radius-lg: 16px;
+
+// ── Transitions ─────────────────────────────────────────
+$transition-fast:   0.2s ease;
+$transition-normal: 0.35s ease;
+$transition-slow:   0.6s ease;
+
+// ── Glow / Shadow ───────────────────────────────────────
+$glow-cyan:   0 0 20px rgba(0, 245, 255, 0.4);
+$glow-purple: 0 0 20px rgba(191, 0, 255, 0.4);
+$glow-pink:   0 0 20px rgba(255, 0, 128, 0.4);
+$glow-strong: 0 0 40px rgba(0, 245, 255, 0.6), 0 0 80px rgba(191, 0, 255, 0.3);
