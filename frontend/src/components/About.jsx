@@ -9,7 +9,7 @@ import "./About.scss";
 // Key stats — shows at a glance credentials
 const STATS = [
   { value: "8.51",  label: "CGPA",            suffix: "/10" },
-  { value: "70+",   label: "DSA Problems",     suffix: "" },
+  { value: "100+",   label: "DSA Problems",     suffix: "" },
   { value: "2+",    label: "Live Projects",    suffix: "" },
   { value: "2nd",   label: "Coding Contest",   suffix: " Rank" },
 ];
